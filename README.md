@@ -1,6 +1,11 @@
 # secure-python-socket-using-ngrok
 SSL secure Python socket using ngrok
 
+## Generate certs
+
+```
+python3 mk_certs.py
+```
 ## Server
 ```
 python3 ssl_server.py  6063
