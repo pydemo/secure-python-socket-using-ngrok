@@ -18,7 +18,7 @@ ngrok tunnel 'tcp://6.tcp.ngrok.io:14507' -> 'tcp://127.0.0.1:6063'
 python3 ssl_client.py 0.tcp.ngrok.io 15957
 ```
 ## Ngrok
-Will let you bypass NAT/proxy
+Will let you bypass NAT/proxy ([integrations](https://pyngrok.readthedocs.io/en/latest/integrations.html))
 
 ## Test
 
