@@ -1,5 +1,7 @@
 # secure-python-socket-using-ngrok
 SSL secure Python socket using ngrok
+## Source
+Python3 cleanup of : [source](https://github.com/msabramo/pyOpenSSL/tree/master/examples/simple) plus ngrok
 
 ## Generate certs
 
