@@ -11,14 +11,18 @@ python3 mk_certs.py
 ## Server
 ```
 python3 ssl_server.py  6063
+```
+```
+Result:
 ngrok tunnel 'tcp://6.tcp.ngrok.io:14507' -> 'tcp://127.0.0.1:6063'
 ```
 ## Client
 ```
 python3 ssl_client.py 0.tcp.ngrok.io 15957
 ```
+
 ## Ngrok
-Will let you bypass NAT/proxy ([integrations](https://pyngrok.readthedocs.io/en/latest/integrations.html))
+Acts as reverse-proxy. Will let you bypass NAT/proxy ([integrations](https://pyngrok.readthedocs.io/en/latest/integrations.html))
 
 ## Test
 
