@@ -55,9 +55,17 @@ def dropClient(cli, errors=None):
         cli.shutdown()
     cli.close()
 from pyngrok import ngrok
+auth=os.environ.get('NG_AUTH')
+assert auth, 'export/set NG_AUTH'
+ngrok.set_auth_token(auth)
+#python ssl_client.py 4.tcp.ngrok.io 11248
+
 port=6063
-public_url = ngrok.connect(port, "tcp").public_url
-print(f"ngrok tunnel '{public_url}' -> 'tcp://127.0.0.1:{port}'")
+try:
+    public_url = ngrok.connect(port, "tcp").public_url
+except:
+    public_url = ngrok.connect(port, "tcp")
+    print("ngrok tunnel '%s' -> 'tcp://127.0.0.1:%d'" % (public_url, port))
 
 while 1:
     #print(123)
