@@ -35,7 +35,9 @@ ctx.load_verify_locations(os.path.join(dir, 'simple', 'CA.cert'))
 
 # Set up server
 server = SSL.Connection(ctx, socket.socket(socket.AF_INET, socket.SOCK_STREAM))
-server.bind(('', int(sys.argv[1])))
+port=int(sys.argv[1])
+assert port
+server.bind(('', port))
 server.listen(3) 
 server.setblocking(0)
 
@@ -60,7 +62,7 @@ assert auth, 'export/set NG_AUTH'
 ngrok.set_auth_token(auth)
 #python ssl_client.py 4.tcp.ngrok.io 11248
 
-port=6063
+
 try:
     public_url = ngrok.connect(port, "tcp").public_url
 except:
@@ -68,7 +70,8 @@ except:
     print("ngrok tunnel '%s' -> 'tcp://127.0.0.1:%d'" % (public_url, port))
 
 while 1:
-    #print(123)
+    print('Waiting for data ...')
+    time.sleep(1)
     try:
         r,w,_ = select.select([server]+list(clients.keys()), writers.keys(), [])
     except:
@@ -97,23 +100,7 @@ while 1:
                 if not cli in writers:
                     writers[cli] = b''
                 writers[cli] = writers[cli] + ret
-    if 0:
-        for cli in w:
-            try:
-                ret = cli.send(writers[cli])
-            except (SSL.WantReadError, SSL.WantWriteError, SSL.WantX509LookupError):
-                pass
-            except SSL.ZeroReturnError:
-                print(111)
-                raise
-                dropClient(cli)
-            except SSL.Error as  errors:
-                raise
-                dropClient(cli, errors)
-            else:
-                writers[cli] = writers[cli][ret:]
-                if writers[cli] == '':
-                    del writers[cli]
+
 
 for cli in clients.keys():
     cli.close()
